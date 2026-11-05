@@ -363,10 +363,10 @@
                   
   <section id="launch-eval-py-reference">
 <h1><code class="docutils literal notranslate"><span class="pre">launch_eval.py</span></code> Reference<a class="headerlink" href="#launch-eval-py-reference" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/launch_eval.py"><code class="docutils literal notranslate"><span class="pre">scripts/launch_eval.py</span></code></a>
+<p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/launch_eval.py"><code class="docutils literal notranslate"><span class="pre">scripts/launch_eval.py</span></code></a>
 is the recommended entry point for evaluation. It does not run anything itself: it turns
 its flags into the environment variables of
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/eval/run_eval_pipeline.sh"><code class="docutils literal notranslate"><span class="pre">scripts/eval/run_eval_pipeline.sh</span></code></a>,
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/eval/run_eval_pipeline.sh"><code class="docutils literal notranslate"><span class="pre">scripts/eval/run_eval_pipeline.sh</span></code></a>,
 the one pipeline that starts the policy server, generates the gym task from the dataset,
 serves the episode queue, runs the eval workers and merges the results (see
 <a class="reference internal" href="../evaluations.html"><span class="std std-doc">Policy Evaluation</span></a>). This page lists every flag it accepts.</p>
@@ -508,7 +508,7 @@ too while <code class="docutils literal notranslate"><span class="pre">--policy<
 <section id="the-episode-queue">
 <h2>The episode queue<a class="headerlink" href="#the-episode-queue" title="Link to this heading">#</a></h2>
 <p>Every eval episode starts from a recorded episode of <code class="docutils literal notranslate"><span class="pre">--dataset-path</span></code>. The pipeline starts
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/serve_episode_queue.py"><code class="docutils literal notranslate"><span class="pre">scripts/serve_episode_queue.py</span></code></a>,
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/serve_episode_queue.py"><code class="docutils literal notranslate"><span class="pre">scripts/serve_episode_queue.py</span></code></a>,
 a small HTTP server (port 8001) that loads one setup per dataset episode at startup and
 hands them out one at a time. All eval workers pull from this one queue, so each episode
 runs exactly once across all GPUs:</p>
@@ -698,7 +698,7 @@ preset’s table, so <code class="docutils literal notranslate"><span class="pre
 <h2>Validating dataset loading<a class="headerlink" href="#validating-dataset-loading" title="Link to this heading">#</a></h2>
 <p>To confirm that the eval scene matches the dataset it was generated from:</p>
 <ul>
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/eval/verify_dataset_loading.py"><code class="docutils literal notranslate"><span class="pre">scripts/eval/verify_dataset_loading.py</span></code></a>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/eval/verify_dataset_loading.py"><code class="docutils literal notranslate"><span class="pre">scripts/eval/verify_dataset_loading.py</span></code></a>
 (standalone, needs a GPU) applies each requested episode’s setup to a freshly reset
 environment, all in one Isaac session, and writes a scene diff (table height, blocks
 present, block and table poses, block sizes, camera intrinsics and pose), first-frame
@@ -794,7 +794,7 @@ table height) runs with nothing applied, and the run carries on.</p></li>
 <p>The four HL latency flags decouple the high-level conditioning (the oracle for
 <code class="docutils literal notranslate"><span class="pre">--policy</span> <span class="pre">maniflow</span></code>, the Molmo2 forward for <code class="docutils literal notranslate"><span class="pre">--policy</span> <span class="pre">molmo2_maniflow</span></code>) from per-step
 low-level inference, in milliseconds of sim time
-(<code class="docutils literal notranslate"><span class="pre">sim_time_ms</span> <span class="pre">=</span> <span class="pre">step</span> <span class="pre">*</span> <span class="pre">step_dt</span> <span class="pre">*</span> <span class="pre">1000</span></code>; see <code class="docutils literal notranslate"><span class="pre">src/blocksuite/serving/hl_latency.py</span></code>). All
+(<code class="docutils literal notranslate"><span class="pre">sim_time_ms</span> <span class="pre">=</span> <span class="pre">step</span> <span class="pre">*</span> <span class="pre">step_dt</span> <span class="pre">*</span> <span class="pre">1000</span></code>; see <code class="docutils literal notranslate"><span class="pre">src/toyblocks/serving/hl_latency.py</span></code>). All
 default to 0, which runs the HL on every LL inference with no delay:</p>
 <ul class="simple">
 <li><p><strong>K</strong> (<code class="docutils literal notranslate"><span class="pre">--hl-update-interval-ms</span></code>): invoke the HL at most once per K ms and buffer its
@@ -841,13 +841,13 @@ default), <code class="docutils literal notranslate"><span class="pre">&lt;out_s
 directory holds <code class="docutils literal notranslate"><span class="pre">launch_params.json</span></code> (the resolved launch parameters, including the
 commit), <code class="docutils literal notranslate"><span class="pre">launch_command.sh</span></code> (the command line), <code class="docutils literal notranslate"><span class="pre">std_out_err.log</span></code> (the pipeline log
 followed by that worker’s output) and <code class="docutils literal notranslate"><span class="pre">skill_success.json</span></code> (per-skill success rates from
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/skill_success_from_eval_run.py"><code class="docutils literal notranslate"><span class="pre">scripts/skill_success_from_eval_run.py</span></code></a>).</p>
-<p>At the end, <a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/merge_eval_runs.py"><code class="docutils literal notranslate"><span class="pre">scripts/merge_eval_runs.py</span></code></a>
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/skill_success_from_eval_run.py"><code class="docutils literal notranslate"><span class="pre">scripts/skill_success_from_eval_run.py</span></code></a>).</p>
+<p>At the end, <a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/merge_eval_runs.py"><code class="docutils literal notranslate"><span class="pre">scripts/merge_eval_runs.py</span></code></a>
 merges the workers into one run directory, <code class="docutils literal notranslate"><span class="pre">runs/&lt;task&gt;-v0/&lt;policy&gt;/&lt;out_subdir&gt;/&lt;problem_id&gt;/&lt;run_id&gt;/</span></code>,
 with every worker’s episodes in one <code class="docutils literal notranslate"><span class="pre">eval_episodes.json</span></code>, the merged success LeRobot
 dataset (moved out of the workers; the failure datasets stay in them) and its own
 <code class="docutils literal notranslate"><span class="pre">skill_success.json</span></code>.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">--wandb</span></code>, <a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/wandb_consolidate.py"><code class="docutils literal notranslate"><span class="pre">scripts/wandb_consolidate.py</span></code></a>
+<p>With <code class="docutils literal notranslate"><span class="pre">--wandb</span></code>, <a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/wandb_consolidate.py"><code class="docutils literal notranslate"><span class="pre">scripts/wandb_consolidate.py</span></code></a>
 merges every worker into one W&amp;B run named <code class="docutils literal notranslate"><span class="pre">&lt;policy&gt;__&lt;task&gt;-v0__&lt;out_subdir&gt;</span></code> (needs
 <code class="docutils literal notranslate"><span class="pre">WANDB_API_KEY</span></code>). It carries <code class="docutils literal notranslate"><span class="pre">summary/run_stats_table</span></code> (one row of headline numbers:
 success rates, episode lengths against the expert’s, timeout rate, throughput),
@@ -1335,7 +1335,7 @@ render and block-identity flags work together.</p>
 <td><p>Log the run to W&amp;B, merging every worker into one run. Also extracts each episode’s expert video for the episodes table.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--wandb-project</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">blocksuite-eval</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">toyblocks-eval</span></code></p></td>
 <td><p>W&amp;B project.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--out-subdir</span></code></p></td>

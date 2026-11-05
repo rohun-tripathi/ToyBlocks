@@ -364,7 +364,7 @@
   <section id="replaying-actions-from-a-dataset">
 <h1>Replaying Actions from a Dataset<a class="headerlink" href="#replaying-actions-from-a-dataset" title="Link to this heading">#</a></h1>
 <p>Replay plays a LeRobot dataset’s recorded actions back through the <strong>same
-queue-driven eval loop a policy uses</strong> (<code class="docutils literal notranslate"><span class="pre">blocksuite.eval.run_eval._run_eval</span></code>).
+queue-driven eval loop a policy uses</strong> (<code class="docutils literal notranslate"><span class="pre">toyblocks.eval.run_eval._run_eval</span></code>).
 There is no separate replay runner any more: <code class="docutils literal notranslate"><span class="pre">--replay</span></code> is just another action
 source next to a policy server, random or zero actions.</p>
 <p>What replay measures is the <em>open-loop ceiling</em> of the sim: replaying the
@@ -385,7 +385,7 @@ GPUs, add <code class="docutils literal notranslate"><span class="pre">--num-eva
 alongside it, because its one-GPU check for the default <code class="docutils literal notranslate"><span class="pre">molmo2_maniflow</span></code> policy runs
 under <code class="docutils literal notranslate"><span class="pre">--replay</span></code> too.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--replay</span></code> selects <code class="docutils literal notranslate"><span class="pre">POLICY_NAME=replay</span></code> in
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/eval/run_eval_pipeline.sh"><code class="docutils literal notranslate"><span class="pre">scripts/eval/run_eval_pipeline.sh</span></code></a>:
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/eval/run_eval_pipeline.sh"><code class="docutils literal notranslate"><span class="pre">scripts/eval/run_eval_pipeline.sh</span></code></a>:
 the policy server is skipped, the autogen task is generated from the dataset,
 the episode queue is started, and each eval worker runs</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/evaluate.py<span class="w"> </span>--task<span class="w"> </span>&lt;slug&gt;-v0<span class="w"> </span>--replay<span class="w"> </span><span class="se">\</span>
@@ -397,7 +397,7 @@ the episode queue is started, and each eval worker runs</p>
 <a class="reference internal" href="launch_eval.html#outputs"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">launch_eval.py</span></code> outputs</span></a>)
 (<code class="docutils literal notranslate"><span class="pre">eval_episodes.json</span></code>, <code class="docutils literal notranslate"><span class="pre">eval_results.json</span></code>, videos, the optional LeRobot
 recording), so the offline diagnostics
-(<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/plot_diagnostics_from_eval_run.py"><code class="docutils literal notranslate"><span class="pre">scripts/plot_diagnostics_from_eval_run.py</span></code></a>)
+(<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/plot_diagnostics_from_eval_run.py"><code class="docutils literal notranslate"><span class="pre">scripts/plot_diagnostics_from_eval_run.py</span></code></a>)
 work unchanged.</p>
 <p>Add <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> to print the pipeline invocation instead of running it.</p>
 </section>
@@ -498,7 +498,7 @@ referencing an object the scene does not spawn, raises instead of warning.</p></
 <code class="docutils literal notranslate"><span class="pre">load_pd_gains_from_dataset</span></code> (first parquet chunk, one representative vector
 per mode), not the exact per-frame recorded ones; joint velocity limits are
 not written. Identical for datasets recorded under two fixed profiles. When
-the dataset has no frames of one mode, that mode falls back to the blocksuite
+the dataset has no frames of one mode, that mode falls back to the ToyBlocks
 defaults.</p></li>
 <li><p>The 5/10-tick settle is a fixed convention (settle steps are not recorded in
 the source dataset). It applies to policy evals with a <code class="docutils literal notranslate"><span class="pre">--dataset_path</span></code> as
@@ -513,7 +513,7 @@ as the dataset it replays.</p></li>
 <p>The former standalone path (<code class="docutils literal notranslate"><span class="pre">--replay_lerobot_dataset</span></code>, <code class="docutils literal notranslate"><span class="pre">--replay_dataset_path</span></code>,
 <code class="docutils literal notranslate"><span class="pre">--max_replay_episodes</span></code>, <code class="docutils literal notranslate"><span class="pre">replay_results.json</span></code>, <code class="docutils literal notranslate"><span class="pre">replay_plots/</span></code>, comparison
 videos) has been removed.
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/extract_lerobot_episode.py"><code class="docutils literal notranslate"><span class="pre">scripts/extract_lerobot_episode.py</span></code></a>
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/extract_lerobot_episode.py"><code class="docutils literal notranslate"><span class="pre">scripts/extract_lerobot_episode.py</span></code></a>
 and the side-by-side video helpers in <code class="docutils literal notranslate"><span class="pre">utils/tamp_dataset.py</span></code> remain for offline
 inspection but are no longer used by eval.</p>
 </section>

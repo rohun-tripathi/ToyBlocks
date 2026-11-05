@@ -447,7 +447,7 @@ between, with <code class="docutils literal notranslate"><span class="pre">scrip
 <li><p><strong>Relabel a policy’s failures</strong>: turn the states where a policy failed during
 evaluation into new expert demonstrations, with
 <code class="docutils literal notranslate"><span class="pre">scripts/datagen/run_tamper_pipeline.py</span></code>
-(<a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/docs/tamper.md">TAMPER</a>).</p></li>
+(<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/docs/tamper.md">TAMPER</a>).</p></li>
 <li><p><strong>Produce training-ready output</strong>: one merged, annotated LeRobot dataset, ready for
 imitation learning and for <a class="reference internal" href="evaluations.html"><span class="std std-doc">evaluation</span></a>.</p></li>
 </ul>
@@ -467,13 +467,13 @@ shows.</p>
   └─ annotate    annotate_target_xy.py           target annotations
 </pre></div>
 </div>
-<p>If you simply want to generate some example datasets with already tested scripts, start from these entry points in the <a class="reference external" href="https://github.com/allenai/blocksuite/tree/main/scripts/datagen">scripts/datagen folder</a>:</p>
+<p>If you simply want to generate some example datasets with already tested scripts, start from these entry points in the <a class="reference external" href="https://github.com/allenai/ToyBlocks/tree/main/scripts/datagen">scripts/datagen folder</a>:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/datagen/run_datagen_pipeline.py">run_datagen_pipeline.py</a>: the end-to-end pipeline described on this page; its docstring lists ready-to-run example commands.</p></li>
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/datagen/run_playdata_pipeline.py">run_playdata_pipeline.py</a>: the same pipeline for play data, where each scene plays a chain of goals without resetting.</p></li>
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/datagen/run_tamper_pipeline.py">run_tamper_pipeline.py</a>: turns states where a policy failed during evaluation into new expert demonstrations.</p></li>
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/datagen/merge_datasets.py">merge_datasets.py</a>: merges per-problem LeRobot datasets into one.</p></li>
-<li><p><a class="reference external" href="https://github.com/allenai/blocksuite/blob/main/scripts/datagen/plot_episode.py">plot_episode.py</a>: plots every signal of one episode, a quick way to check a generated dataset.</p></li>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/datagen/run_datagen_pipeline.py">run_datagen_pipeline.py</a>: the end-to-end pipeline described on this page; its docstring lists ready-to-run example commands.</p></li>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/datagen/run_playdata_pipeline.py">run_playdata_pipeline.py</a>: the same pipeline for play data, where each scene plays a chain of goals without resetting.</p></li>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/datagen/run_tamper_pipeline.py">run_tamper_pipeline.py</a>: turns states where a policy failed during evaluation into new expert demonstrations.</p></li>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/datagen/merge_datasets.py">merge_datasets.py</a>: merges per-problem LeRobot datasets into one.</p></li>
+<li><p><a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/scripts/datagen/plot_episode.py">plot_episode.py</a>: plots every signal of one episode, a quick way to check a generated dataset.</p></li>
 </ul>
 </section>
 <section id="full-pipeline-data-generation">
@@ -570,7 +570,7 @@ python<span class="w"> </span>scripts/datagen/run_datagen_pipeline.py<span class
 <td><p>Distractor objects per problem (passed to the generator as <code class="docutils literal notranslate"><span class="pre">--num_distractors</span></code>; see <a class="reference internal" href="datagen/task_generation.html#common-pitfalls"><span class="std std-ref">Task generation</span></a>).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--domain-path</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">src/blocksuite/tamp/blocks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/toyblocks/tamp/blocks</span></code></p></td>
 <td><p>Path to the PDDL domain directory.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--usd-library</span></code></p></td>
@@ -711,7 +711,7 @@ the flags YAML <code class="docutils literal notranslate"><span class="pre">rere
 episode, the 224 RGB and depth sidecars, <code class="docutils literal notranslate"><span class="pre">left_camera</span></code> skipped and failure episodes skipped. The
 default flags draw HDRI backdrops from polyhaven (part of the base asset download) and the
 separately licensed Laval indoor set; see
-<a class="reference external" href="https://github.com/allenai/blocksuite/blob/release/docs/rerender/README_local.md#hdri-backdrops">HDRI backdrops</a>.
+<a class="reference external" href="https://github.com/allenai/ToyBlocks/blob/main/docs/rerender/README_local.md#hdri-backdrops">HDRI backdrops</a>.
 Every rerender flag is described in <a class="reference internal" href="datagen/rerender.html"><span class="std std-doc">Re-rendering</span></a>.</p>
 </section>
 <section id="per-stage-parameters">
